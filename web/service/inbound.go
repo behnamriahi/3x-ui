@@ -2028,11 +2028,12 @@ func validateEmail(email string) (bool, error) {
 		return false, errors.New("email contains spaces, please remove them")
 	}
 
+	/*
 	if email != strings.ToLower(email) {
 		return false, errors.New("email contains uppercase letters, please convert to lowercase")
 	}
-
-	emailPattern := `^[a-z0-9@._-]+$`
+	*/
+	emailPattern := `^[a-zA-Z0-9@._-]+$`
 	if !regexp.MustCompile(emailPattern).MatchString(email) {
 		return false, errors.New("email contains invalid characters, please use only lowercase letters, digits, and @._-")
 	}
