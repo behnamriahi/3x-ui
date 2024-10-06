@@ -32,10 +32,10 @@ bash <(curl -Ls https://raw.githubusercontent.com/behnamriahi/3x-ui/master/insta
 
 ## Instalar una Versión Personalizada
 
-Para instalar la versión deseada, agrega la versión al final del comando de instalación. Por ejemplo, ver `v2.4.2`:
+Para instalar la versión deseada, agrega la versión al final del comando de instalación. Por ejemplo, ver `v2.4.3`:
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/behnamriahi/3x-ui/master/install.sh) v2.4.2
+bash <(curl -Ls https://raw.githubusercontent.com/behnamriahi/3x-ui/master/install.sh) v2.4.3
 ```
 
 ## Certificado SSL
@@ -284,11 +284,14 @@ Nuestra plataforma ofrece compatibilidad con una amplia gama de arquitecturas y 
 <details>
   <summary>Haz clic para ver los detalles de la configuración predeterminada</summary>
 
-### Nombre de Usuario & Contraseña & Ruta Base Web:
+### Nombre de usuario, Contraseña, Puerto y Ruta Base Web
 
-  Estos se generarán aleatoriamente si no los modificas.
+Si elige no modificar estas configuraciones, se generarán aleatoriamente (esto no se aplica a Docker).
 
-  - **Puerto:** el puerto predeterminado para el panel es `2053`
+**Configuraciones predeterminadas para Docker:**
+- **Nombre de usuario:** admin
+- **Contraseña:** admin
+- **Puerto:** 2053
 
 ### Gestión de la Base de Datos:
 

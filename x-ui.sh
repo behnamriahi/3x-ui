@@ -186,20 +186,26 @@ update_menu() {
 }
 
 custom_version() {
-    echo "Enter the panel version (like 2.0.0):"
-    read panel_version
+    echo "Enter the panel version (like 2.4.0):"
+    read tag_version
 
-    if [ -z "$panel_version" ]; then
+    if [ -z "$tag_version" ]; then
         echo "Panel version cannot be empty. Exiting."
+        exit 1
+    fi
+
+    min_version="2.3.5"
+    if [[ "$(printf '%s\n' "$tag_version" "$min_version" | sort -V | head -n1)" == "$tag_version" && "$tag_version" != "$min_version" ]]; then
+        echo "Please use a newer version (at least 2.3.5). Exiting."
         exit 1
     fi
 
     download_link="https://raw.githubusercontent.com/behnamriahi/3x-ui/master/install.sh"
 
     # Use the entered panel version in the download link
-    install_command="bash <(curl -Ls $download_link) v$panel_version"
+    install_command="bash <(curl -Ls $download_link) v$tag_version"
 
-    echo "Downloading and installing panel version $panel_version..."
+    echo "Downloading and installing panel version $tag_version..."
     eval $install_command
 }
 
@@ -265,12 +271,13 @@ gen_random_string() {
 reset_webbasepath() {
     echo -e "${yellow}Resetting Web Base Path${plain}"
     
-    # Prompt user to set a new web base path
-    read -rp "Please set the new web base path [press 'y' for a random path]: " config_webBasePath
-    
-    if [[ $config_webBasePath == "y" ]]; then
-        config_webBasePath=$(gen_random_string 10)
+    read -rp "Are you sure you want to reset the web base path? (y/n): " confirm
+    if [[ $confirm != "y" && $confirm != "Y" ]]; then
+        echo -e "${yellow}Operation canceled.${plain}"
+        return
     fi
+
+    config_webBasePath=$(gen_random_string 10)
     
     # Apply the new web base path setting
     /usr/local/x-ui/x-ui setting -webBasePath "${config_webBasePath}" >/dev/null 2>&1
@@ -478,7 +485,7 @@ enable_bbr() {
     centos | almalinux | rocky | oracle)
         yum -y update && yum -y install ca-certificates
         ;;
-    fedora)
+    fedora | amzn)
         dnf -y update && dnf -y install ca-certificates
         ;;
     arch | manjaro | parch)
@@ -818,7 +825,7 @@ ssl_cert_issue() {
     centos | almalinux | rocky | oracle)
         yum -y update && yum -y install socat
         ;;
-    fedora)
+    fedora | amzn)
         dnf -y update && dnf -y install socat
         ;;
     arch | manjaro | parch)
@@ -1169,7 +1176,7 @@ install_iplimit() {
             yum update -y && yum install epel-release -y
             yum -y install fail2ban
             ;;
-        fedora)
+        fedora | amzn)
             dnf -y update && dnf -y install fail2ban
             ;;
         arch | manjaro | parch)
@@ -1250,7 +1257,7 @@ remove_iplimit() {
             yum remove fail2ban -y
             yum autoremove -y
             ;;
-        fedora)
+        fedora | amzn)
             dnf remove fail2ban -y
             dnf autoremove -y
             ;;

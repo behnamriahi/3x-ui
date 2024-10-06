@@ -32,10 +32,10 @@ bash <(curl -Ls https://raw.githubusercontent.com/behnamriahi/3x-ui/master/insta
 
 ## Install Custom Version
 
-To install your desired version, add the version to the end of the installation command. e.g., ver `v2.4.2`:
+To install your desired version, add the version to the end of the installation command. e.g., ver `v2.4.3`:
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/behnamriahi/3x-ui/master/install.sh) v2.4.2
+bash <(curl -Ls https://raw.githubusercontent.com/behnamriahi/3x-ui/master/install.sh) v2.4.3
 ```
 
 ## SSL Certificate
@@ -315,11 +315,14 @@ Our platform offers compatibility with a diverse range of architectures and devi
 <details>
   <summary>Click for default settings details</summary>
 
-### Username & Password & webbasepath:
+### Username, Password, Port, and Web Base Path
 
-  These will be generated randomly if you skip modifying them.
+If you choose not to modify these settings, they will be generated randomly (this does not apply to Docker).
 
-  - **Port:** the default port for panel is `2053`
+**Default Settings for Docker:**
+- **Username:** admin
+- **Password:** admin
+- **Port:** 2053
 
 ### Database Management:
 
